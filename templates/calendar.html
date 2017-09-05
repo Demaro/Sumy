@@ -1,0 +1,297 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Calendario Actividades </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                                     <div class="form-group">
+                <label class="control-label col-md-4 col-sm-3 col-xs-12" for="user_asign">Usuario <span class="required">*</span>
+                            </label>
+                 {{form.user_asign}}
+                
+                </div>
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div id='calendar'></div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+
+    <!-- calendar modal -->
+    <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel">Cargar Nueva Actividad</h4>
+          </div>
+          <div class="modal-body">
+            <div id="testmodal" style="padding: 5px 20px;">
+            
+              <form id="antoform" action="" method="POST" enctype='multipart/form-data' class="form-horizontal calender" role="form">
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emisor_nn">Emisor externo 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          {{ form.emisor_nn }}
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Emisor interno 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          {{ form.emisor }}
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Destinatario</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          {{ form.receptor }}
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date_initial" >Fecha Ingreso
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="date_initial"  name="date_initial" type="text">
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              <button class="btn btn-primary" type="reset">Limpiar</button>
+                          <button type="submit" class="btn btn-success">Enviar</button>
+                        </div>
+                      </div>
+                    {% csrf_token %}
+                      
+              
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary pull-right">Crear</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title" id="myModalLabel2">Detalle de la Actividad</h4>
+          </div>
+          <div class="modal-body">
+
+            <div id="testmodal2" style="padding: 5px 20px;">
+              <form id="antoform2" class="form-horizontal calender" role="form">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Inicio:</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="start2"  name="start2">
+
+                  </div>
+                </div>
+
+            <div id="testmodal2" style="padding: 5px 20px;">
+              <form id="antoform2" class="form-horizontal calender" role="form">
+                <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="user_asign">Asignar Usuario <span class="required">*</span>
+                            </label>
+                            {{form.user_asign}}
+                  </div>
+
+
+                  <label class="col-sm-3 control-label">Titulo</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="title2" name="title2">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Descripcion</label>
+                  <div class="col-sm-9">
+                    <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary pull-right">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
+    <!--
+    <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
+    -->
+
+
+        
+{% endblock content %}
+
+
+{% block content2 %}
+
+
+
+<script>
+  $(document).ready(function() {
+    var e,f,a=new Date,b=a.getDate(),c=a.getMonth(),d=a.getFullYear(),
+    g=$('#calendar').fullCalendar({
+      monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+      dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+      dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay,listWeek',
+        
+      },
+
+
+      selectable:!0,
+      selectHelper:!0,
+      select:function(a,b,c){$("#fc_create").click(),
+      e=a,ended=b,
+      $(".antosubmit").on("click",function(){var a=$("#title").val();
+        return b&&(ended=b),
+        f=$("#event").val(),
+        a&&g.fullCalendar("renderEvent",{title:a,start:e,end:b,allDay:c},!0),
+        $("#title").val(""),
+        g.fullCalendar("unselect"),
+        $(".antoclose").click(),!1})},
+        eventClick:function(a,b,c, e){$("#fc_edit").click(),
+
+
+        $("#title2").val(a.title),
+        f=$("#event").val(),
+        $(".antosubmit2").on("click",function(){a.title=$("#title2").val(),
+        g.fullCalendar("updateEvent",a),
+        $(".antoclose2").click()}),
+        g.fullCalendar("unselect"),
+
+        $("#start2").val(a.start),
+        f=$("#event").val(),
+        $(".antosubmit2").on("click",function(){a.start=$("#start2").val(),
+        g.fullCalendar("updateEvent",a),
+        $(".antoclose2").click()}),
+        g.fullCalendar("unselect")},
+
+        editable:!0,
+
+        events: [
+
+        {% for i in all_events %}
+
+        {
+          title: ' {% if i.emisor %} {{ i.emisor }} {% endif %} . {% if i.emisor_nn %} {{ i.emisor_nn }}  {% endif %}  {{ i.receptor }}. {{ i.estado }}  ',
+        
+          start: ' {{ i.fecha_inicio|date:"Y-m-d" }} ',
+
+          end:   ' {{ i.fecha_termino|date:"Y-m-d" }} '
+
+        },
+
+        {% endfor %}
+
+   ]
+
+
+})
+
+});
+
+
+</script>
+
+
+
+
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date_initial"]'); //our date input has the name "birthdate"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'yyyy-mm-dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="fecha_termino"]'); //our date input has the name "birthdate"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'yyyy-mm-dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+
+
+
+
+
+{% endblock content2 %}

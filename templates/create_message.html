@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+
+{% block content %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+
+          <!-- /top tiles -->
+
+
+
+
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Ingreso del Documento<small>Ingrece los datos</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="emisor_nn">Emisor externo 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          {{ form.emisor_nn }}
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Emisor interno 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          {{ form.emisor }}
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Destinatario</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="middle-name" type="text" name="middle-name">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="date_initial" >Fecha Ingreso
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="date_initial"  name="date_initial" type="text">
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+              <button class="btn btn-primary" type="reset">Limpiar</button>
+                          <button type="submit" class="btn btn-success">Enviar</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+                        </form>
+
+
+
+                    <!-- End SmartWizard Content -->
+
+
+
+
+ 
+                    <!-- End SmartWizard Content -->
+                  </div>
+
+                </div>
+              </div>      
+
+
+{% endblock content %}
+
+
+
+
+{% block content2 %}
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date_initial"]'); //our date input has the name "birthdate"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+
+
+<script>
+
+ $('#wizard').smartWizard({
+
+
+  // Properties
+    selected: 0,  // Selected Step, 0 = first step   
+    keyNavigation: true, // Enable/Disable key navigation(left and right keys are used if enabled)
+    enableAllSteps: false,  // Enable/Disable all steps on first load
+    transitionEffect: 'fade', // Effect on navigation, none/fade/slide/slideleft
+    contentURL:null, // specifying content url enables ajax content loading
+    contentURLData:null, // override ajax query parameters
+    contentCache:true, // cache step contents, if false content is fetched always from ajax url
+    cycleSteps: false, // cycle step navigation
+    enableFinishButton: false, // makes finish button enabled always
+  hideButtonsOnDisabled: false, // when the previous/next/finish buttons are disabled, hide them instead
+    errorSteps:[],    // array of step numbers to highlighting as error steps
+    labelNext:'Siguiente', // label for Next button
+    labelPrevious:'Anterior', // label for Previous button
+    labelFinish:'Finalizar',  // label for Finish button        
+    noForwardJumping:false,
+  // Events
+    onLeaveStep: null, // triggers when leaving a step
+    onShowStep: null,  // triggers when showing a step
+    onFinish: null  // triggers when Finish button is clicked
+    finishBtn: 'FINISH',
+}); 
+</script>
+
+{% endblock content2 %}

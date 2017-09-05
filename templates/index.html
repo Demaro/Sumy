@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+
+          <!-- /top tiles -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Resumen de Documentos </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-12 col-sm-12 col-xs-12 profile_left">
+                      <div class="profile_img">
+
+                      </div>
+
+
+
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+
+                      <div class="profile_title">
+                        <div class="col-md-6">
+                          <h2>User Activity Report</h2>
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                      </div>
+                      <!-- start of user-activity-graph -->
+
+
+
+                     
+                    <div id="chart_plot_01" class="demo-placeholder"></div>
+
+                    
+<div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+              
+                  <div class="x_title">
+                  <br>
+                    <h2>
+                    <br>Tabla Documentos Recientes </h2>
+                    </div>
+                  <div class="x_content">
+
+                  <table id="datatable-button" class="table table-bordered" role="grid" aria-describedby="datatable_info">
+                 
+                      <thead>
+                        <tr>
+                        <th>#</th>
+                          <th>Emisor</th>
+                          <th>Destinatario</th>
+                          <th>Fecha envio</th>
+                          <th>Estado</th>
+                          <th>Codigo Verificador</th>
+                          
+                        </tr>
+                      </thead>
+
+
+                      <tbody>
+                      {% if obj_all %}
+                        {% for obj in obj_all %}
+                        <tr>
+                        <td>{{ obj.id }}</td>
+                          <td>{{ obj.emisor.username }}</td>
+                          <td>{{ obj.receptor.username }}</td>
+                          <td>{{ obj.fecha_inicio }}</td>
+                          <td>{{ obj.estado }}</td>
+                          <th>{{ obj.cod_valid }}</th>
+                        
+
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>      
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% if messages %}
+
+    {% for message in messages %}
+    <div class="modal fade" id="mostrarmodal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Codigo verificador Creado</h3>
+     </div>
+         <div class="modal-body">
+         <center>
+          <h3>Codigo verificador: {{ obj_new.cod_valid }}</h3>
+            <h3>Emisor: {{ obj_new.emisor }}</h3>
+            <h3>Receptor: {{ obj_new.receptor }}</h3>
+            <h3>Fecha Ingreso: {{ obj_new.fecha_inicio }}</h3>
+            
+            {% endfor %}
+
+            Comprobante de documento Ingresado.  
+            </center>  
+     </div>
+         <div class="modal-footer">
+        <a href="#" data-dismiss="modal" class="btn btn-primary">Imprimir</a>
+     </div>
+      </div>
+   </div>
+</div>
+
+
+
+{% endif %}
+
+
+{% endblock content %}
+
+
+
+{% block content2 %}
+
+
+<script type="text/javascript">
+function init_PNotify(){"undefined"!=typeof PNotify&&(console.log("init_PNotify"),new PNotify({title:"Carta Entregada",type:"info",text:"Emisor: Steve, Receptor: Bill, Fecha Entrega: 12, Septiembre a las 12:00",addclass:"info",styling:"bootstrap3",hide:!1,before_close:function(a){return a.update({title:a.options.title+" - Enjoy your Stay",before_close:null}),a.queueRemove(),!1}}))}
+
+
+
+</script>
+
+
+
+<script>
+   $(document).ready(function()
+   {
+      $("#mostrarmodal").modal("show");
+   });
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#datatable-button').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: "copy",
+                className:"btn-sm",
+
+            },
+            {
+                extend: "csv",
+                className:"btn-sm",
+
+            },
+            {
+                extend: "print",
+                className:"btn-sm",
+
+            },
+
+
+        ],
+        responsive: !100
+    } );
+    } );
+</script>        
+        <!-- footer content -->
+
+
+{% endblock content2 %}
+
